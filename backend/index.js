@@ -1,23 +1,18 @@
 const express = require("express")
 const {User} = require("./database")
-const {userExists,checkUserParamCount,validateUserParams} = require("./middleware")
+const {userExists,validateUserParams} = require("./middleware")
 
 const app = express()
 
 app.use(express.json())
 
-app.post("/signup",userExists,checkUserParamCount,validateUserParams, async (req,res) => {
-    const email = req.body.email
-    const password = req.body.password
-    const firstname = req.body.firstName
-    const lastName = req.body.lastName
-
-
+app.post("/signup",userExists,validateUserParams, async (req,res) => {
+    const {email, password, firstName, lastName} = req.body
 
     const newUser = await User.create({
         email : email,
         password : password,
-        firstName : firstname,
+        firstName : firstName,
         lastName : lastName
     })
 

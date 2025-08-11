@@ -16,41 +16,6 @@ const userExists = async (req,res,next) => {
     }
 }
 
-const checkUserParamCount = (req,res,next) => {
-    const email = req.body.email
-    const password = req.body.password
-    const firstName = req.body.firstName
-    const lastName = req.body.lastName
-
-    if(email == undefined || email == null){
-        res.status(400).json({
-            success : false,
-            message : "Email is required"
-        })
-    }
-    else if(password == undefined || password == null){
-        res.status(400).json({
-            success : false,
-            message : "Password is required"
-        })
-    }
-    else if(firstName == undefined || firstName == null){
-        res.status(400).json({
-            success : false,
-            message : "First name is required"
-        })
-    }
-    else if(lastName == undefined || lastName == null){
-        res.status(400).json({
-            success : false,
-            message : "Last name is required"
-        })
-    }
-    else{
-        next()
-    }
-}
-
 const validateUserParams = (req,res,next) => {
     const email = req.body.email
     const password = req.body.password
@@ -73,6 +38,5 @@ const validateUserParams = (req,res,next) => {
 
 module.exports = {
     userExists,
-    checkUserParamCount,
     validateUserParams
 }
