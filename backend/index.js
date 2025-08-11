@@ -31,4 +31,23 @@ app.post("/signup",userExists,validateUserParams, async (req,res) => {
 
 })
 
+
+app.get("/login", async (req,res) => {
+    const {email, password} = req.body
+    const fetchData = await User.findOne({email:email, password:password})
+
+    if(fetchData){
+        res.status(200).json({
+            success : true,
+            data : fetchData
+        })
+    }
+    else{
+        res.status(401).json({
+            success : false,
+            message : "Invalid credentials"
+        })
+    }
+})
+
 app.listen(3000)
